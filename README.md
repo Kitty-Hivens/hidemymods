@@ -29,11 +29,20 @@ during the FML / NeoForge network handshake.
 
 ## Supported versions
 
-| Minecraft | Loader   | Build tool                | Gradle  | Build JVM | Status         |
-|-----------|----------|---------------------------|---------|-----------|----------------|
-| 1.7.10    | Forge    | RetroFuturaGradle 1.4.4   | 8.14.4  | Java 21+  | scaffold only  |
-| 1.12.2    | Forge    | ForgeGradle 2.3-SNAPSHOT  | 4.10.3  | Java 8    | initial impl   |
-| 1.21.1    | NeoForge | ModDevGradle 2.0          | 8.14.4  | Java 21+  | scaffold only  |
+| Minecraft | Loader   | Build tool                | Gradle  | Build JVM | Status                 |
+|-----------|----------|---------------------------|---------|-----------|------------------------|
+| 1.7.10    | Forge    | RetroFuturaGradle 1.4.4   | 8.14.4  | Java 21+  | scaffold only          |
+| 1.12.2    | Forge    | ForgeGradle 2.3-SNAPSHOT  | 4.10.3  | Java 8    | shipped, validated     |
+| 1.21.1    | NeoForge | ModDevGradle 2.0          | 8.14.4  | Java 21+  | scaffold only          |
+
+The 1.12.2 build is verified: ASM transformer hooks
+`FMLHandshakeMessage$ModList.toBytes`, runtime helper reads the spoof
+config, the wire payload reflects the configured list, the resulting
+handshake passes against a real SmartyCraft server. The mod is
+currently dormant in default mirror deploys because the canonical
+mod-set passes the server's standard FML check without spoofing; the
+mod activates whenever a pack ships with a mod-set that differs from
+what the target server requires.
 
 Each loader subproject is its own standalone Gradle build with a
 pinned wrapper. They are not unified under a root Gradle build because
