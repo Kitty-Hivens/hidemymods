@@ -1,0 +1,9 @@
+{
+  "_comment": "Drop this file (renamed to hidemymods-spoof.json) into the Minecraft instance's working directory, or point hidemymods.spoof.file system property at its absolute path. The 'id' values are Forge mod IDs (lowercase, no spaces) -- NOT display names. Extract them from the target server's pack manifest or from each mod jar's mcmod.info modid field. Order is preserved on the wire.",
+  "mods": [
+    {"id": "appliedenergistics2", "version": "rv6-stable-7"},
+    {"id": "buildcraftlib",       "version": "7.99.24.6"},
+    {"id": "buildcraftcore",      "version": "7.99.24.6"},
+    {"id": "ic2",                 "version": "2.8.222-ex112"}
+  ]
+}

@@ -50,6 +50,29 @@ Drop the appropriate jar into your `mods/` directory. The file must
 match the Minecraft version of your installation. Once a release is
 cut, jars will be on the Releases page.
 
+Then create `hidemymods-spoof.json` in the Minecraft instance's
+working directory (or point `-Dhidemymods.spoof.file=/path/to.json`
+at it) with the mod-list you want the client to claim to the server:
+
+```json
+{
+  "mods": [
+    {"id": "appliedenergistics2", "version": "rv6-stable-7"},
+    {"id": "buildcraftlib",       "version": "7.99.24.6"}
+  ]
+}
+```
+
+`id` is the Forge mod-id (lowercase, no spaces) -- NOT the display
+name. Extract real mod-ids from the target server's pack manifest or
+from each mod jar's `mcmod.info` `modid` field. Order is preserved
+on the wire.
+
+If the config file is missing or invalid, the mod logs to stderr and
+falls back to passthrough: the real loaded mod-list goes out and the
+mod becomes a no-op. See `hidemymods-spoof.example.json` for the
+format.
+
 ## Building
 
 Each subproject builds independently. Build JVM must match the
