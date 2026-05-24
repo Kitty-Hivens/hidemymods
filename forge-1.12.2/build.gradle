@@ -1,0 +1,56 @@
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '2.3-SNAPSHOT', changing: true
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+
+group = 'dev.hivens.hidemymods'
+version = '0.1.0'
+archivesBaseName = 'hidemymods-forge-1.12.2'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+sourceSets.main.java.srcDirs += file('../_common-src')
+
+minecraft {
+    version = '1.12.2-14.23.5.2847'
+    runDir = 'run'
+    mappings = 'snapshot_20171003'
+    makeObfSourceJar = false
+}
+
+processResources {
+    inputs.property 'version', project.version
+    inputs.property 'mcversion', project.minecraft.version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+        expand 'version': project.version, 'mcversion': project.minecraft.version
+    }
+
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
+
+// FML treats a jar as both a coremod and a regular mod when these
+// attributes are set together. Without FMLCorePluginContainsFMLMod
+// FML loads only the coremod plugin and skips @Mod scanning, which
+// means the in-game presence check and any future user-facing config
+// surface would not exist.
+jar {
+    manifest {
+        attributes(
+            'FMLCorePlugin'                 : 'dev.hivens.hidemymods.forge112.coremod.HideMyModsCorePlugin',
+            'FMLCorePluginContainsFMLMod'   : 'true',
+            'FMLAT'                         : 'hidemymods_at.cfg'
+        )
+    }
+}

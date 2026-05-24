@@ -1,0 +1,26 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "Apache License 2.0"
+issueTrackerURL = "https://github.com/Kitty-Hivens/hidemymods/issues"
+
+[[mods]]
+modId = "hidemymods"
+version = "0.1.0"
+displayName = "hidemymods"
+authors = "Kitty-Hivens"
+displayURL = "https://github.com/Kitty-Hivens/hidemymods"
+description = '''Sends an empty mod-list to the server during the NeoForge handshake. Loaded mods are unaffected locally; only the network payload is cloaked.'''
+
+[[dependencies.hidemymods]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1.0,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.hidemymods]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1, 1.22)"
+ordering = "NONE"
+side = "BOTH"

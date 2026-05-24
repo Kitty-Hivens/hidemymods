@@ -1,0 +1,27 @@
+plugins {
+    id 'com.gtnewhorizons.retrofuturagradle' version '1.4.4'
+}
+
+group = 'dev.hivens.hidemymods'
+version = '0.1.0'
+archivesBaseName = 'hidemymods-forge-1.7.10'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+sourceSets.main.java.srcDirs += file('../_common-src')
+
+minecraft {
+    mcVersion.set('1.7.10')
+}
+
+processResources {
+    inputs.property 'version', project.version
+    inputs.property 'mcversion', '1.7.10'
+
+    filesMatching('mcmod.info') {
+        expand 'version': project.version, 'mcversion': '1.7.10'
+    }
+}

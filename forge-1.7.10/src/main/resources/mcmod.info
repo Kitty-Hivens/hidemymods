@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "hidemymods",
+    "name": "hidemymods",
+    "description": "Sends an empty mod-list to the server during the FML handshake. Loaded mods are unaffected locally; only the network payload is cloaked.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "https://github.com/Kitty-Hivens/hidemymods",
+    "updateUrl": "",
+    "authorList": ["Kitty-Hivens"],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
