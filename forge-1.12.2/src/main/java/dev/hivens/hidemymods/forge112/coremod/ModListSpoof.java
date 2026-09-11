@@ -38,9 +38,11 @@ import java.util.Map;
  *     ]
  *   }
  *
- * Unknown JSON fields are tolerated (Gson default). Entries with a
- * missing id or version are skipped silently to keep the wire payload
- * well-formed.
+ * Unknown JSON fields are tolerated (Gson default). Entries with no
+ * id, or with the version field absent entirely, are skipped silently
+ * to keep the wire payload well-formed. An empty version string is
+ * kept: some servers register a mod with no version, and omitting the
+ * entry would report the mod as absent instead.
  */
 public final class ModListSpoof {
 
@@ -86,8 +88,12 @@ public final class ModListSpoof {
             }
             Map<String, String> out = new LinkedHashMap<>(cfg.mods.size());
             for (SpoofEntry e : cfg.mods) {
-                if (e != null && e.id != null && e.version != null
-                    && !e.id.isEmpty() && !e.version.isEmpty()) {
+                // An empty version is an answer, not a missing field. Servers
+                // do register mods with no version at all, and the check on
+                // the far side asks whether the id is present before it looks
+                // at what it maps to, so dropping the entry reads as the mod
+                // being absent rather than as having no version.
+                if (e != null && e.id != null && e.version != null && !e.id.isEmpty()) {
                     out.put(e.id, e.version);
                 }
             }

@@ -77,6 +77,12 @@ name. Extract real mod-ids from the target server's pack manifest or
 from each mod jar's `mcmod.info` `modid` field. Order is preserved
 on the wire.
 
+A `version` of `""` is kept and sent as an empty string. Servers do
+register mods with no version at all, and the far-side check asks
+whether the id is present before it looks at what it maps to, so
+omitting such an entry reports the mod as absent. Only an entry with
+no `version` field at all, or with no `id`, is skipped.
+
 If the config file is missing or invalid, the mod logs to stderr and
 falls back to passthrough: the real loaded mod-list goes out and the
 mod becomes a no-op. See `hidemymods-spoof.example.json` for the

@@ -72,6 +72,13 @@ Order in the config is preserved on the wire via `LinkedHashMap`. The
 ASM transformer is independent of the spoof contents -- changing the
 list is a config edit, no rebuild.
 
+An entry whose `version` is the empty string is kept rather than
+skipped. A server may register a mod with no version -- Galaxy does
+this for `micdoodlecore` -- and `checkModList` looks the id up before
+it compares what the id maps to, so a dropped entry is read as the
+mod being missing. Only a `version` field that is absent entirely is
+treated as a malformed entry.
+
 ## Why ASM, not Mixin (1.12.2 / 1.7.10)
 
 The hook target is a single method on a single class with a stable
