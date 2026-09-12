@@ -56,8 +56,10 @@ between subprojects.
 ## Installation
 
 Drop the appropriate jar into your `mods/` directory. The file must
-match the Minecraft version of your installation. Once a release is
-cut, jars will be on the Releases page.
+match the Minecraft version of your installation. Jars are on the
+[Releases](https://github.com/Kitty-Hivens/hidemymods/releases) page;
+only the Forge 1.12.2 build is published, the other two loaders being
+scaffolds so far.
 
 Then create `hidemymods-spoof.json` in the Minecraft instance's
 working directory (or point `-Dhidemymods.spoof.file=/path/to.json`
