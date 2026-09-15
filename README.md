@@ -31,9 +31,19 @@ during the FML / NeoForge network handshake.
 
 | Minecraft | Loader   | Build tool                | Gradle  | Build JVM | Status                 |
 |-----------|----------|---------------------------|---------|-----------|------------------------|
-| 1.7.10    | Forge    | RetroFuturaGradle 1.4.4   | 8.14.4  | Java 21+  | scaffold only          |
+| 1.7.10    | Forge    | RetroFuturaGradle 1.4.4   | 8.14.4  | Java 21+  | built, not yet on a server |
 | 1.12.2    | Forge    | ForgeGradle 2.3-SNAPSHOT  | 4.10.3  | Java 8    | shipped, validated     |
 | 1.21.1    | NeoForge | ModDevGradle 2.0          | 8.14.4  | Java 21+  | scaffold only          |
+
+The 1.7.10 build is the same three classes against `cpw.mods.fml`
+rather than `net.minecraftforge.fml`, with two differences that are not
+renames and were read off forge 10.13.4.1614 rather than assumed. The
+list length is written as a two-byte varint there and a three-byte one
+on 1.12.2, and a list written under the wrong bound is read wrong by
+the far side instead of refused. `toBytes` also opens with a
+`super.toBytes` call on 1.7.10 that the rewrite drops, which is safe
+only because `FMLHandshakeMessage.toBytes` is a bare return on that
+version.
 
 The 1.12.2 build is verified: ASM transformer hooks
 `FMLHandshakeMessage$ModList.toBytes`, runtime helper reads the spoof
