@@ -31,9 +31,17 @@ during the FML / NeoForge network handshake.
 
 | Minecraft | Loader   | Build tool                | Gradle  | Build JVM | Status                 |
 |-----------|----------|---------------------------|---------|-----------|------------------------|
-| 1.7.10    | Forge    | RetroFuturaGradle 1.4.4   | 8.14.4  | Java 21+  | built, not yet on a server |
+| 1.7.10    | Forge    | RetroFuturaGradle 1.4.4   | 8.14.4  | Java 21+  | shipped, validated     |
 | 1.12.2    | Forge    | ForgeGradle 2.3-SNAPSHOT  | 4.10.3  | Java 8    | shipped, validated     |
 | 1.21.1    | NeoForge | ModDevGradle 2.0          | 8.14.4  | Java 21+  | scaffold only          |
+
+The 1.7.10 build is verified the same way, against a live server, and one
+thing it does not solve is worth stating: on that version the client
+validates the server's mod list as well as the other way round, so a
+mod the server also runs still has to be carried at the server's
+version. The claim answers the server's check and cannot answer the
+client's own, since it changes what is sent and that refusal is about
+what was received.
 
 The 1.7.10 build is the same three classes against `cpw.mods.fml`
 rather than `net.minecraftforge.fml`, with two differences that are not
