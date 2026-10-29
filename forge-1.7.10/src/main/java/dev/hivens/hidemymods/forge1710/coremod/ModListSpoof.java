@@ -3,6 +3,7 @@ package dev.hivens.hidemymods.forge1710.coremod;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import io.netty.buffer.ByteBuf;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.ByteBufUtils;
 
 import java.io.File;
@@ -58,7 +59,7 @@ public final class ModListSpoof {
      * preserved on the wire via LinkedHashMap.
      */
     public static void writeModList(Map<String, String> modTags, ByteBuf buffer) {
-        Map<String, String> toSend = loadSpoof();
+        Map<String, String> toSend = isLocalServerRunning() ? null : loadSpoof();
         if (toSend == null) {
             toSend = modTags;
         }
@@ -71,6 +72,22 @@ public final class ModListSpoof {
             ByteBufUtils.writeUTF8String(buffer, entry.getKey());
             ByteBufUtils.writeUTF8String(buffer, entry.getValue());
         }
+    }
+
+    /**
+     * A singleplayer world is a server too: the client shakes hands with
+     * the integrated server in its own JVM, which then rejects the
+     * spoofed list over every mod the spoof leaves out. The same JVM
+     * also encodes the integrated server's own list, and on 1.7.10 the
+     * client checks that one as well, so it must stay real. A dedicated
+     * server always has a server instance, so it passes through too,
+     * which is right for a client-only mod.
+     *
+     * The client clears this reference when it leaves a world, and sets
+     * it before connecting to the next one.
+     */
+    private static boolean isLocalServerRunning() {
+        return FMLCommonHandler.instance().getMinecraftServerInstance() != null;
     }
 
     private static Map<String, String> loadSpoof() {
