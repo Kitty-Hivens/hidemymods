@@ -2,12 +2,14 @@
   {
     "modid": "hidemymods",
     "name": "hidemymods",
-    "description": "Sends an empty mod-list to the server during the FML handshake. Loaded mods are unaffected locally; only the network payload is cloaked.",
+    "description": "Replaces the mod list the client reports during the FML handshake with one read from hidemymods-spoof.json. Loaded mods are unaffected locally, and with no config file the real list goes on the wire unchanged.",
     "version": "${version}",
     "mcversion": "${mcversion}",
     "url": "https://github.com/Kitty-Hivens/hidemymods",
     "updateUrl": "",
-    "authorList": ["Kitty-Hivens"],
+    "authorList": [
+      "Kitty-Hivens"
+    ],
     "credits": "",
     "logoFile": "",
     "screenshots": [],

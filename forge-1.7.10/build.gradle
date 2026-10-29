@@ -25,3 +25,17 @@ processResources {
         expand 'version': project.version, 'mcversion': '1.7.10'
     }
 }
+
+// FMLCorePlugin names the class FML resolves before any mod is built, and the
+// two attributes are set together. Without FMLCorePluginContainsFMLMod, FML
+// loads the coremod plugin and skips @Mod scanning, so the mod would never
+// appear in the list it is meant to be reporting from.
+jar {
+    manifest {
+        attributes(
+            'FMLCorePlugin'               : 'dev.hivens.hidemymods.forge1710.coremod.HideMyModsCorePlugin',
+            'FMLCorePluginContainsFMLMod' : 'true',
+            'FMLAT'                       : 'hidemymods_at.cfg'
+        )
+    }
+}
