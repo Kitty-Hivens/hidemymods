@@ -15,7 +15,7 @@ import dev.hivens.hidemymods.common.ModMeta;
 @Mod(
     modid                    = ModMeta.MOD_ID,
     name                     = ModMeta.MOD_NAME,
-    version                  = "0.1.0",
+    version                  = "0.2.1",
     acceptableRemoteVersions = "*"
 )
 public final class HideMyMods {
