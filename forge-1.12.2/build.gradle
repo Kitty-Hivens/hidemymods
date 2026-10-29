@@ -11,7 +11,7 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 
 group = 'dev.hivens.hidemymods'
-version = '0.1.0'
+version = '0.2.1'
 archivesBaseName = 'hidemymods-forge-1.12.2'
 
 sourceCompatibility = 1.8
